@@ -11,7 +11,7 @@ import axios from 'axios'
 axios.interceptors.request.use(function (config) {
   // Do something before request is sent
   const token = localStorage.getItem('token');
-  config.headers.common['Authorization'] = 'Bearer' + token
+  config.headers.common['Authorization'] = 'Bearer ' + token
   return config
 }, function (error) {
   // Do something with request error

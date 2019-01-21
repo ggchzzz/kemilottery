@@ -11,6 +11,7 @@ import './tools/axios.js'
 import ElementUI from 'element-ui';
 import '@/mixin/mixin'
 import 'reset-css'
+import 'font-awesome/css/font-awesome.css'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 axios.defaults.baseURL=process.env.VUE_APP_baseURL;

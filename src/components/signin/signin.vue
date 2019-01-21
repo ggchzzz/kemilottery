@@ -27,9 +27,6 @@
                 </el-form>
             </div>
         </div>
-        <!-- <input type="text" v-model="userInfo.accountName" placeholder="请输入用户名">
-        <input type='text' v-model="userInfo.password" placeholder="请输入密码">
-        <button @click="signin">登录</button> -->
     </div>
 </template>
 <script>
@@ -58,7 +55,7 @@ export default {
                 if(valid){
                      console.log(this.userInfo);
                      this.$http.post('/signin',this.userInfo).then(resp=>{
-                     console.log(resp);
+                     console.log(resp.data.success);
                     if(resp.data.success){
                         localStorage.setItem('token',resp.data.token)
                         localStorage.setItem('isremeber',this.remeberMe);
@@ -80,12 +77,7 @@ export default {
         }
     },
     created(){
-        this.remeberMe=localStorage.getItem('isremeber')=='true'?true:false;
-        window.onbeforeunload=function(e){
-            if(!this.remeberMe){
-                localStorage.clear();
-            }
-        }
+        this.rememberMe=localStorage.getItem('isremeber')==='true'?true:false;
     }
 }
 
