@@ -6,6 +6,7 @@ import system from '@/components/System/System'
 import permissionManger from '@/components/System/permissionManger/permissionManger'
 import RoleMange from '@/components/System/RoleMange/RoleMange'
 import AccountMange from '@/components/System/AccountManage/Accountmanage'
+import addNewUser from '@/components/System/AccountManage/AddNewUser'
 Vue.use(Router)
 
 export default new Router({
@@ -34,6 +35,13 @@ export default new Router({
               path:'AccountMange',
               component:AccountMange,
               name:"用户管理",
+              children:[
+                {
+                  path:'addNewUser',
+                  component:addNewUser,
+                  name:"新增用户"
+                }
+              ]
             },
             {
               path:'permissionManger',

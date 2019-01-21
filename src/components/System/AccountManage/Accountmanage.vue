@@ -2,7 +2,7 @@
 <div id='accountMange'>
     <div class="userList">
     <div  class="listHeader" style="width:100%;height:44px;background:white">
-        <el-button type="primary" size="mini">新增</el-button> 
+        <el-button type="primary" size="mini" @click="$router.push({name:'新增用户'})">新增</el-button> 
     </div>
    <table>
        <tr>
@@ -14,12 +14,13 @@
            <td>{{item.username}}</td>
            <td></td>
            <td>
-               <span >删除</span>|
-               <span>编辑</span>
+               <span style="color:red" @click="deleteUser(item)">删除</span>|
+               <span style="color:blue">编辑</span>
            </td>
        </tr>
    </table>   
     </div>
+    <router-view/>
 </div>  
 </template>
 <script>
@@ -29,8 +30,23 @@ export default {
     computed:{
         ...mapGetters(["allUsers"])
     },
+    methods:{
+
+        deleteUser(item){
+        const action=()=>{
+            this.post(this.$apis.deleteUser,{_id:item._id}).then(()=>{
+                    this.$store.dispatch('loadAllAccount');
+
+            })
+            // this.$http.post(this.$apis.deleteUser,{_id:item._id}).then((resp)=>{
+            //     console.log(resp);
+            //     })
+            }
+            this.operatorConfirm('删除该账号',action)       
+        }
+    },
     mounted(){
-        this.$store.dispatch('loadAllAccount');
+        this.$store.dispatch('loadAllAccount')
     },
 }
 </script>
