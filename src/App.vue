@@ -1,8 +1,16 @@
 <template>
   <div id="app">
     <router-view/>
+
   </div>
 </template>
+<script>
+export default {
+  mounted(){
+    console.log(this.$apis);
+  }
+}
+</script>
 
 <style lang="scss">
 #app{

@@ -18,6 +18,10 @@ export default {
             fontIcon:['fa-lock','fa-users','fa-address-card-o']
         }
     },
+    mounted(){
+        console.log(this.$apis.findAllRoles);
+            this.$store.dispatch("loadAllRoles",{api:this.$apis.findAllRoles,pageSize:10,pageNo:1});
+    },
     computed:{
         accountPermission(){
 

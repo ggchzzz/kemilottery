@@ -27,33 +27,6 @@ const toTree=(item)=>{
   console.log(arr);
   return arr;
 }
-// const toTree=(item)=>{
-//   var obj={};
-//   var length=item.length;
-//     for(let i=0;i<length;i++){
-      
-//       var permission=item[i];
-//       if(!permission.parentid){
-//           permission.children=[];
-//           obj[permission._id]=permission;
-
-//         }
-       
-//     }
-//     for (let i=0;i<length;i++){
-//       var permission=item[i];
-//       for(var key in obj){
-//           if(permission.parentid==key)
-//           obj[key]=children.push(permission);
-//       }
-//     }
-//     var arr=[];
-//     for(let key in obj){
-//       arr.push(obj[key])
-//     }
-//     console.log(obj);
-//     return arr;
-// }
 export default new Vuex.Store({
   modules:{SystemModule},//注册模块
   state: {

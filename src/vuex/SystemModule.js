@@ -1,41 +1,38 @@
 import axios from '@/tools/axios'
-import api from '@/apis'
-import { stat } from 'fs';
+import apis from '@/apis'
+const LoadDota=(commit,mutationName,payload)=>{
+    axios.get(payload.api,{pageSize:payload.pageSize,pageNo:payload.pageNo}).then(resp=>{
+        commit(mutationName,resp.data)
+    })
+}
 const state={
     allUsers:[],
-    allRolles:[]
+    allRoles:[]
 }
 const getters={
         allUsers(state){
             return state.allUsers;
         },
         allRolles(state){
-            return
+            return state.allRoles;
         }
 }
 const mutations={
     loadAllACCOUNT(state,payload){
     state.allUsers=payload.allUsers;
     },
-    LOADALLROLES(){
-        state.allRolles=payload.allRolles;
+    LOADALLROLES(state,payload){
+    state.allRoles=payload.allRoles;
     }
 }
 const actions={
     loadAllAccount({commit},payload){
-        axios.get(api.findAllUsers).then(resp=>{
-            console.log(resp);
+        axios.get(apis.findAllUsers).then(resp=>{
             commit("loadAllACCOUNT",resp.data)
         })
-        // commit("loadAllACCOUNT")
-        // axios.get(payload.url,payload.params)
-   
     },
     loadAllRoles({commit},payload){
-        axios.get(api.findAllUsers).then(resp=>{
-            console.log(resp);
-            commit("loadAllACCOUNT",resp.data)
-        })
+        LoadDota(commit,'LOADALLROLES',payload)
     }
 }
 export default{

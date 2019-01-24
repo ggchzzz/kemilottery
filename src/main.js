@@ -35,7 +35,6 @@ router.beforeEach((to,from,next)=>{
     }
   }
 })
-Vue.prototype.$api = apis
 new Vue({
   router,
   store,
