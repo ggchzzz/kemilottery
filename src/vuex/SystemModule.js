@@ -7,7 +7,8 @@ const LoadDota=(commit,mutationName,payload)=>{
 }
 const state={
     allUsers:[],
-    allRoles:[]
+    allRoles:[],
+    allPermissions:[]
 }
 const getters={
         allUsers(state){
@@ -15,9 +16,16 @@ const getters={
         },
         allRolles(state){
             return state.allRoles;
-        }
+        },
+        allPermissions(state){
+            return  window.toTree(state.allPermissions);
+        },
+        
 }
 const mutations={
+    LOADPERMISSIONS(state,payload){
+        state.allPermissions=payload.allPermission;
+    },
     loadAllACCOUNT(state,payload){
     state.allUsers=payload.allUsers;
     },
@@ -33,6 +41,9 @@ const actions={
     },
     loadAllRoles({commit},payload){
         LoadDota(commit,'LOADALLROLES',payload)
+    },
+    loadAllPermission({commit},payload){
+        LoadDota(commit,"LOADPERMISSIONS",payload)
     }
 }
 export default{

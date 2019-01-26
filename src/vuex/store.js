@@ -27,6 +27,7 @@ const toTree=(item)=>{
   console.log(arr);
   return arr;
 }
+window.toTree=toTree;
 export default new Vuex.Store({
   modules:{SystemModule},//注册模块
   state: {

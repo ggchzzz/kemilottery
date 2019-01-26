@@ -19,8 +19,15 @@ export default {
         }
     },
     mounted(){
+        this.$store.dispatch("loadAllRoles",{api:this.$apis.findAllRoles,pageSize:10,pageNo:1});
+        this.$store.dispatch('loadAllPermission',{api:this.$apis.findAllPermission,pageSize:10,pageNo:1});
         console.log(this.$apis.findAllRoles);
+    },
+    beforeRouteUpdate(to,from,next){
+        if(to.name=="系统管理")
             this.$store.dispatch("loadAllRoles",{api:this.$apis.findAllRoles,pageSize:10,pageNo:1});
+            this.$store.dispatch('loadAllPermission',{api:this.$apis.findAllPermission,pageSize:10,pageNo:1})
+       next();
     },
     computed:{
         accountPermission(){
