@@ -50,7 +50,6 @@
                     <el-tree
                     :data="allPermissions"
                     show-checkbox
-                    default-expand-all
                     node-key="_id"
                     ref="tree"
                     highlight-current
@@ -95,8 +94,47 @@ export default {
         ...mapGetters(['allRolles','allPermissions'])
     },
     methods:{
+        handClsoe(){
+            this.showAddNew=false;
+            this.roleInfo={};
+            this.resetForm('roleInfo');
+            this.$refs.tree.setCheckedKeys([]);
+
+        },
         addNewRole(){
-            console.log(this.$refs.tree.getCheckedNodes());
+            var checkedPermissions=this.$refs.tree.getCheckedNodes();
+            // 定义字符串，村粗所有被选中的权限，把他们的Id合并成一个字符串
+            var permissionId='';
+            var length=checkedPermissions.length;
+            for(var i=0;i<length;i++){
+                var permission=checkedPermissions[i];
+                if(i<length-1){
+                    if(permission.parentid!="0")
+                    {
+                        permissionId+=permission['_id']+','+permission.parentid+",";
+                    }
+                    else{
+                          permissionId+=permission['_id']+',';
+
+                    }
+                }
+                else
+                {
+                     if(permission.parentid!="0")
+                    {
+                        permissionId+=permission['_id']+','+permission.parentid;
+                    }
+                    else{
+                          permissionId+=permission['_id'];
+
+                    }
+                }
+            }
+            // 获取所有的选中权限以及父权限，以及进行去重处理
+          var rs=Array.from( new Set(permissionId.split(',')));
+          this.roleInfo.permission=rs;
+          this.$refs.tree.setCheckedKeys([]);
+            console.log(rs);
             this.$refs['roleInfo'].validate((valid)=>{
             if(valid){
                      this.post(this.$apis.addNewRole,this.roleInfo).then(()=>{
